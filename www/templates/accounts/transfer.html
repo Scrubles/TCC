@@ -1,0 +1,90 @@
+<form name="form" ng-submit="transferCtrl.save()" novalidate>
+  <ion-view view-title="{{::'TRANSFER' | translate}}">
+ 
+    <ion-nav-buttons side="left">
+      <button type="button" class="button button-icon button-clear ion-android-arrow-back" ng-click="historyBack()"></button>
+    </ion-nav-buttons>
+    <ion-nav-buttons side="right">
+      <button type="button" class="button button-icon button-clear icon-checkmark" ng-click="transferCtrl.submit()"></button>
+    </ion-nav-buttons>
+
+    <ion-content class="container" on-swipe-left="transferCtrl.submit()">
+      <input type="hidden" ng-model="transferCtrl.transfer.id">
+
+      <div class="list card borderless">
+        <div class="item item-divider item-icon-left item-icon-right item-light" id="accountFrom" ng-click="transferCtrl.accountsFromModal.show()">
+          <span class="icon" ng-class="transferCtrl.transfer.from.icon" ng-style="transferCtrl.isValidAccounts() ? transferCtrl.transfer.from.iconColor : {'color':'#f00'}"></span>
+          {{::'FROM' | translate}}
+          <p>{{transferCtrl.transfer.from.name}}</p>
+          <span class="icon ion-android-arrow-dropdown"></span>
+        </div>
+
+        <div class="item item-divider item-icon-left item-icon-right item-light" id="accountTo" ng-click="transferCtrl.accountsToModal.show()">
+          <span class="icon" ng-class="transferCtrl.transfer.to.icon" ng-style="transferCtrl.isValidAccounts() ? transferCtrl.transfer.to.iconColor : {'color':'#f00'}"></span>
+          {{::'TO' | translate}}
+          <p>{{transferCtrl.transfer.to.name}}</p>
+          <span class="icon ion-android-arrow-dropdown"></span>
+        </div>
+        
+        <ionic-calculator ng-value="transferCtrl.transfer.value" positive="true">
+          <input type="hidden" name="value" ng-model="transferCtrl.transfer.value" min="0.01" required>
+          <div class="item item-icon-right">
+            <h2>{{::'VALUE' | translate}}</h2>
+            <p>{{transferCtrl.transfer.value | currency:selectedCurrency}}</p>
+            <span class="icon icon-calculator"></span>
+          </div>
+        </ionic-calculator>
+
+        <ionic-datepicker idate="transferCtrl.transfer.effectiveDate">
+          <div class="item item-icon-right">
+            <h2>{{::'DATE' | translate}}</h2>
+            <p>{{transferCtrl.transfer.effectiveDate | date:'shortDate'}}</p>
+            <span class="icon icon-calendar"></span>
+          </div>
+        </ionic-datepicker>
+
+        <label for="transferDescription" class="item">
+          <h2 class="title">{{::'DESCRIPTION' | translate}}</h2>
+          <textarea class="textfield" id="transferDescription" name="description" ng-model="transferCtrl.transfer.description"></textarea>
+        </label>
+      </div>
+
+      <div class="form-end-buttons">
+        <button type="button" class="button button-clear button-calm" ng-click="historyBack()">
+          {{::'CANCEL' | translate}}
+        </button>
+        <button type="submit" class="button button-clear button-calm">
+          {{::'SAVE' | translate}}
+        </button>
+      </div>
+    </ion-content>
+
+    <script id="accountsFrom.html" type="text/ng-template">
+      <ion-modal-view class="ion-select"  ng-style="transferCtrl.calculateAccountsFromPosition()">
+        <ion-content>
+          <div class="list borderless">
+            <ion-item class="item-icon-left item-icon-right" ng-class="{'stable-bg': accountFrom.id == transferCtrl.transfer.from.id}" ng-click="transferCtrl.selectAccountFrom(accountFrom)" ng-repeat="accountFrom in transferCtrl.accounts track by accountFrom.id">
+              <span class="icon {{::accountFrom.icon}}" ng-style="accountFrom.iconColor"></span>
+              <h2>{{::accountFrom.name}}</h2>
+              <span class="icon" ng-class="accountFrom.id == transferCtrl.transfer.from.id ? 'ion-ios-checkmark-empty' : ''"></span>
+            </ion-item>
+          </div>
+        </ion-content>
+      </ion-modal-view>
+    </script>
+
+    <script id="accountsTo.html" type="text/ng-template">
+      <ion-modal-view class="ion-select" ng-style="transferCtrl.calculateAccountsToPosition()">
+        <ion-content>
+          <div class="list borderless">
+            <ion-item class="item-icon-left item-icon-right" ng-class="{'stable-bg': accountTo.id == transferCtrl.transfer.to.id}" ng-click="transferCtrl.selectAccountTo(accountTo)" ng-repeat="accountTo in transferCtrl.accounts track by accountTo.id">
+              <span class="icon {{::accountTo.icon}}" ng-style="accountTo.iconColor"></span>
+              <h2>{{::accountTo.name}}</h2>
+              <span class="icon" ng-class="accountTo.id == transferCtrl.transfer.to.id ? 'ion-ios-checkmark-empty' : ''"></span>
+            </ion-item>
+          </div>
+        </ion-content>
+      </ion-modal-view>
+    </script>
+  </ion-view>
+</form>

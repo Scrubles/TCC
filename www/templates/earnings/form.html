@@ -1,0 +1,110 @@
+<form name="form" ng-submit="earningCtrl.save()" novalidate>
+  <ion-view view-title="{{::'EARNING' | translate}}" cache-view="false">
+ 
+    <ion-nav-buttons side="left">
+      <button type="button" class="button button-icon button-clear ion-android-arrow-back" ng-click="historyBack()"></button>
+    </ion-nav-buttons>
+    <ion-nav-buttons side="right">
+      <button type="button" class="button button-icon button-clear mdi mdi-delete" ng-click="earningCtrl.delete()" ng-if="earningCtrl.isEdit"></button>
+      <button type="button" class="button button-icon button-clear icon-checkmark" ng-click="earningCtrl.submit()"></button>
+    </ion-nav-buttons>
+
+    <ion-content class="container" on-swipe-left="earningCtrl.submit()">
+
+      <input type="hidden" ng-model="earningCtrl.earning.id">
+
+      <div class="list card borderless">
+        <div class="item item-icon-left item-icon-right item-light" ng-click="earningCtrl.accountsModal.show()" id="earningAccounts">
+          <span class="icon" ng-class="earningCtrl.earning.account ? earningCtrl.earning.account.icon : 'mdi mdi-information-outline assertive'" ng-style="earningCtrl.earning.account ? earningCtrl.earning.account.iconColor : {}"></span>
+          {{::'ACCOUNT' | translate}}
+          <p>{{earningCtrl.earning.account.name}}</p>
+          <span class="icon ion-android-arrow-dropdown"></span>
+        </div>
+
+        <div class="item item-icon-left item-icon-right item-light" ng-click="earningCtrl.categoriesModal.show()" id="earningCategories">
+          <span class="icon" ng-class="earningCtrl.earning.category.icon" ng-style="earningCtrl.earning.category.iconColor"></span>
+          {{::'CATEGORY' | translate}}
+          <p>{{earningCtrl.earning.category.name}}</p>
+          <span class="icon ion-android-arrow-dropdown"></span>
+        </div>
+        
+        <ionic-calculator ng-value="earningCtrl.earning.value" positive="true" account="earningCtrl.earning.account">
+          <input type="hidden" name="value" ng-model="earningCtrl.earning.value" required>
+          <div class="item item-icon-right" ng-class="{'error': form.$submitted && form.value.$error.required}">
+            <h2 class="title">{{::'VALUE' | translate}}</h2>
+            <p>{{earningCtrl.earning.value | currency:selectedCurrency}}</p>
+            <span class="icon icon-calculator"></span>
+          </div>
+        </ionic-calculator>
+
+        <ionic-datepicker idate="earningCtrl.earning.effectiveDate" notify-time="earningCtrl.earning.notifyTime">
+          <div class="item item-icon-right">
+            <h2 class="title">{{::'DATE' | translate}}</h2>
+            <p>{{earningCtrl.earning.effectiveDate | date:'shortDate'}}</p>
+            <span class="icon icon-calendar"></span>
+          </div>
+        </ionic-datepicker>
+
+        <label for="earningDescription" class="item">
+          <h2 class="title">{{::'DESCRIPTION' | translate}}</h2>
+          <textarea class="textfield" id="earningDescription" name="description" ng-model="earningCtrl.earning.description"></textarea>
+        </label>
+        
+        <div class="item item-checkbox">
+          <label class="checkbox checkbox-square checkbox-calm">
+            <input type="checkbox" ng-model="earningCtrl.earning.received">
+          </label>
+          {{::'RECEIVED' | translate}}
+        </div>
+      </div>
+
+      <div class="form-end-buttons">
+        <button type="button" class="button button-clear button-calm" ng-click="historyBack()">
+          {{::'CANCEL' | translate}}
+        </button>
+        <button type="button" class="button button-clear button-calm" ng-click="earningCtrl.delete()" ng-if="earningCtrl.isEdit">
+          {{::'DELETE' | translate}}
+        </button>
+        <button type="submit" class="button button-clear button-calm">
+          {{::'SAVE' | translate}}
+        </button>
+      </div>
+    </ion-content>
+
+    <script id="earningAccounts.html" type="text/ng-template">
+      <ion-modal-view class="ion-select"  ng-style="earningCtrl.calculateAccountsPosition()">
+        <ion-content>
+          <div class="list borderless">
+            <ion-item class="item-icon-left item-icon-right" ng-class="{'stable-bg': account.id == earningCtrl.earning.account.id}" ng-click="earningCtrl.selectAccount(account)" ng-repeat="account in earningCtrl.accounts track by account.id">
+              <span class="icon {{::account.icon}}" ng-style="account.iconColor"></span>
+              <h2>{{::account.name}}</h2>
+              <span class="icon" ng-class="{'ion-ios-checkmark-empty': account.id == earningCtrl.earning.account.id}"></span>
+            </ion-item>
+            <ion-item class="item-icon-left" ng-click="earningCtrl.newAccount()">
+              <span class="icon icon-plus"></span>
+              {{::'ADD_NEW_ACCOUNT' | translate}}
+            </ion-item>
+          </div>
+        </ion-content>
+      </ion-modal-view>
+    </script>
+
+    <script id="earningCategories.html" type="text/ng-template">
+      <ion-modal-view class="ion-select" ng-style="earningCtrl.calculateCategoriesPosition()">
+        <ion-content>
+          <div class="list borderless">
+            <ion-item class="item-icon-left item-icon-right" ng-class="{'stable-bg': category.id == earningCtrl.earning.category.id}" ng-click="earningCtrl.selectCategory(category)" ng-repeat="category in earningCtrl.categories track by category.id">
+              <span class="icon {{::category.icon}}" ng-style="category.iconColor"></span>
+              <h2>{{::category.name}}</h2>
+              <span class="icon" ng-class="{'ion-ios-checkmark-empty': category.id == earningCtrl.earning.category.id}"></span>
+            </ion-item>
+            <ion-item class="item-icon-left" ng-click="earningCtrl.newCategory()">
+              <span class="icon icon-plus"></span>
+              {{::'ADD_NEW_CATEGORY' | translate}}
+            </ion-item>
+          </div>
+        </ion-content>
+      </ion-modal-view>
+    </script>
+  </ion-view>
+</form>

@@ -1,0 +1,47 @@
+.range {
+  &.range-light {
+    input::-webkit-slider-thumb {
+      background-color: $range-light-track-bg;
+    }
+  }
+  &.range-stable {
+    input::-webkit-slider-thumb {
+      background-color: $range-stable-track-bg;
+    }
+  }
+  &.range-positive {
+    input::-webkit-slider-thumb {
+      background-color: $range-positive-track-bg;
+    }
+  }
+  &.range-calm {
+    input::-webkit-slider-thumb {
+      background-color: $range-calm-track-bg;
+    }
+  }
+  &.range-balanced {
+    input::-webkit-slider-thumb {
+      background-color: $range-balanced-track-bg;
+    }
+  }
+  &.range-assertive {
+    input::-webkit-slider-thumb {
+      background-color: $range-assertive-track-bg;
+    }
+  }
+  &.range-energized {
+    input::-webkit-slider-thumb {
+      background-color: $range-energized-track-bg;
+    }
+  }
+  &.range-royal {
+    input::-webkit-slider-thumb {
+      background-color: $range-royal-track-bg;
+    }
+  }
+  &.range-dark {
+    input::-webkit-slider-thumb {
+      background-color: $range-dark-track-bg;
+    }
+  }
+}

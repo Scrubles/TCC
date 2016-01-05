@@ -1,0 +1,399 @@
+.splashscreen {
+  position: absolute;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 60%;
+}
+
+.bar-shadow {
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,.25);
+}
+.has-subheader .bar-header.bar-shadow {
+  box-shadow: none;
+}
+
+.container {
+  background-color: #e9eaed;
+}
+
+.no-horizontal-padding {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.transaction-situation {
+  font-size: 11px;
+  color: #999;
+}
+
+/* ICON */
+.icon-menu {
+  font-size: 26px !important;
+}
+.iconpicker-down {
+  font-size: 14px;
+  color: #777;
+  margin-left: 5px;
+}
+.icon-select {
+  background: #fff;
+  height: 200px;
+}
+.icon-select .icon {
+  font-size: 42px;
+  display: inline-block;
+  margin: 5px 2px;
+  width: 1.28571429em;
+  text-align: center;
+  opacity: .4;
+}
+.icon-select .icon.icon-selected {
+  opacity: 1;
+}
+
+/* MENU */
+.item-menu .icon.gray {
+  color: gray;
+}
+
+/* FLOATING ACTION BUTTON */
+.fab {
+  width: 56px;
+  height: 56px;
+  border-radius: 100%;
+  background: #33cd5f;
+  border: none;
+  outline: none;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  z-index: 20;
+}
+.fab .icon {
+  color: #fff;
+  display: inline-block;
+  vertical-align: middle;
+  height: 28px;
+  font-size: 24px;
+}
+
+/* LIST */
+.list.borderless .item {
+  border: none;
+}
+.divider {
+  margin: 10px 0;
+}
+.divider span {
+  margin: 0 10px;
+  line-height: 0.1em;
+}
+.divider .left {
+  float: left;
+}
+.divider .right {
+  float: right;
+}
+.no-data {
+  color: #000;
+  text-decoration: none;
+  text-align: center;
+  font-size: 18px;
+}
+.list.has-fab {
+  margin-bottom: 60px;
+}
+
+/* REPORT */
+.report .item {
+  padding: 8px !important;
+}
+.report .row {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+.report .row .col {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* POPUP */
+.backdrop {
+  background-color: rgba(0,0,0,.12) !important;
+}
+.popup {
+  background-color: #fff !important;
+  box-shadow: 0 8px 10px -5px rgba(0,0,0,.14),0 16px 24px 2px rgba(0,0,0,.098),0 6px 30px 5px rgba(0,0,0,.084) !important;
+  border-radius: 4px !important;
+}
+.no-head .popup-head {
+  display: none !important;
+}
+.popup-head {
+  text-align: left !important;
+  border-bottom: none !important;
+}
+.popup-title {
+  font-size: 20px !important;
+}
+.popup-buttons {
+  text-align: right !important;
+  display: block !important;
+  padding: 0 !important;
+  min-height: 0 !important;
+}
+.popup-buttons .button {
+  display: inline-block !important;
+  min-width: 70px !important;
+  border-color: transparent !important;
+  background: none !important;
+  box-shadow: none !important;
+  color: #009688 !important;
+  margin-right: 0 !important;
+}
+
+/* DATEPICKER */
+.datepicker-header {
+    text-align: left;
+}
+.datepicker-header .col {
+    margin-left: 4%;
+}
+.today {
+    color: #009688;
+}
+.date-col {
+    width: 32px;
+    height: 32px;
+    margin: 0 auto;
+    border-radius: 50%;
+    line-height: 32px;
+    border: none;
+}
+.date-col:active, .date-col.activated, .date-selected {
+    background: #009688;
+    color: #fff;
+}
+
+/* TIMEPICKER */
+.timePickerColon {
+  padding-top: 43px;
+  text-align: center;
+  font-weight: bold;
+}
+.timePickerArrows {
+  width: 100%;
+}
+.timePickerBoxText {
+  height: 40px;
+  text-align: center;
+  border: 1px solid #dddddd;
+  font-size: 16px;
+  padding-top: 5px;
+}
+.overflowShow {
+  white-space: normal !important;
+}
+
+/* CALCULATOR */
+.calculator {
+  text-align: center;
+}
+.calculator .equation {
+  display: inline-block;
+  font-size: 20px !important;
+  height: 42px;
+  line-height: 42px;
+}
+.calculator .header {
+
+}
+.calculator .sub-header {
+  padding: 0;
+  margin-bottom: 10px;
+  height: 50px;
+}
+.calculator .buttons .col span, .calculator .col.erase-button span {
+  display: inline-block;
+  font-size: 20px !important;
+  width: 42px;
+  height: 42px;
+  margin: 0 auto;
+  border-radius: 50%;
+  line-height: 42px;
+  border: none;
+}
+.calculator .buttons .col:active span, .calculator .buttons .col.activated span {
+  background-color: #009688;
+  color: #fff;
+}
+.calculator .col.erase-button:active span, .calculator .col.erase-button.activated span {
+  color: #ddd;
+}
+
+/* FORM */
+.disabled {
+  opacity: .26;
+}
+.item.disabled.activated {
+  background: #fff !important;
+}
+
+.item.item-checkbox {
+  padding-left: 54px;
+}
+
+.radio-button input[type="radio"] {
+  display: none;
+}
+.radio-button label {
+  display: block;
+}
+.radio-button .icon {
+  font-size: 24px;
+}
+
+.form-end-buttons {
+  text-align: right;
+}
+.form-end-buttons .button {
+  min-width: 70px;
+}
+
+.textfield {
+  margin-top: 5px !important;
+  border-bottom: 1px solid rgb(48, 48, 48) !important;
+  width: 100% !important;
+  height: 20px !important;
+  resize: none;
+}
+.textfield:disabled {
+  opacity: .26;
+  border-bottom: 1px dotted !important;
+  background-color: #fff;
+}
+.textfield.no-label {
+  margin-top: 15px !important;
+}
+.error .textfield {
+  border-bottom: 1px solid rgb(244, 67, 54) !important;
+}
+.error .title, .error input::-webkit-input-placeholder, .error .icon {
+  color: rgb(244, 67, 54);
+}
+.focused .textfield {
+  border-bottom: 1px solid rgb(16, 108, 208) !important;
+}
+.focused .title {
+  color: rgb(16, 108, 208);
+}
+
+.col.col-overflow {
+  overflow: hidden;
+}
+
+.modal.ion-select {
+  box-shadow: 0 0 5px 2px rgba(0,0,0,.25);
+}
+.ion-select .item {
+  height: 42px;
+  padding: 10px;
+}
+.ion-select .item.item-icon-left, .ion-select .item.item-checkbox {
+  padding-left: 52px;
+}
+.ion-select .item.item-icon-right {
+  padding-right: 52px;
+}
+.ion-select .icon {
+  font-size: 25px;
+}
+
+/* FILTER */
+.select-items .empty {
+  color: #999;
+}
+.select-items .chip {
+  display: inline-block;
+  padding: 8px 12px;
+  margin: 4px 8px 4px 0;
+  border-radius: 16px;
+  background: rgb(224,224,224);
+}
+
+/* PASSWORD */
+.password.list .item, .currency.list .item {
+  padding: 4px;
+}
+
+/* CHARTS */
+.chart {
+  width: 96% !important;
+  height: 250px !important;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+.chart-download {
+  font-size: 42px !important;
+  position: absolute;
+  right: 5px;
+  top: 5px;
+}
+
+/* BUDGET */
+.budget .row {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+.budget .row .col {
+  padding: 0 !important;
+  margin: 0 8px 0 0 !important;
+}
+
+.budget .total {
+  position: absolute;
+  right: 16px;
+  top: 16px;
+}
+
+meter {
+  width: 100%;
+  position: relative;
+  clear: both;
+  -webkit-appearance: none;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+}
+meter.current-month::after {
+  position: absolute;
+  top: 0;
+  border: 1px solid #444;
+  content: '';
+  height: 100%;
+}
+meter::-webkit-meter-bar {
+  background: none;
+  background-color: whiteSmoke;
+  box-shadow: 0 5px 5px -5px #333 inset;
+}
+meter::-webkit-meter-optimum-value {
+  box-shadow: 0 5px 5px -5px #999 inset;
+  background-size: 100% 100%;
+}
+meter.meter-80::-webkit-meter-optimum-value {
+  background-image: linear-gradient(90deg, #33cd5f 0%, #33cd5f 100%);
+}
+meter.meter-80-100::-webkit-meter-optimum-value {
+  background-image: linear-gradient(90deg, #ffc900 0%, #ffc900 100%);
+}
+meter.meter-100::-webkit-meter-optimum-value {
+  background-image: linear-gradient(90deg, #ef473a 0%, #ef473a 100%);
+}

@@ -1,0 +1,38 @@
+<ion-side-menus enable-menu-with-back-views="false">
+    <ion-side-menu-content edge-drag-threshold="true">
+        <div class="{{globalNavClass}}">
+            <ion-nav-bar class="bar-calm bar-shadow has-tabs-top"></ion-nav-bar>
+            <ion-nav-view name="content"></ion-nav-view>
+        </div>
+    </ion-side-menu-content>
+
+    <ion-side-menu side="left">
+        <ion-header-bar class="bar-calm menu-bar">
+            <h2 class="title light">TCC</h2>
+        </ion-header-bar>
+        <ion-content class="container">
+            <ion-list>
+                <ion-item menu-close class="item-menu item-icon-left" href="#/app/accounts">
+                    <span class="icon icon-wallet icon-menu gray"></span>
+                    {{::'ACCOUNTS' | translate}}
+                </ion-item>
+                <ion-item menu-close class="item-menu item-icon-left" href="#/app/earnings">
+                    <span class="icon icon-dollars icon-menu gray"></span>
+                    {{::'EARNINGS' | translate}}
+                </ion-item>
+                <ion-item menu-close class="item-menu item-icon-left" href="#/app/expenses">
+                    <span class="icon icon-banknote icon-menu gray"></span>
+                    {{::'EXPENSES' | translate}}
+                </ion-item>
+                <ion-item menu-close class="item-menu item-icon-left" href="#/app/categories">
+                    <span class="icon icon-tags icon-menu gray"></span>
+                    {{::'CATEGORIES' | translate}}
+                </ion-item>
+                <ion-item menu-close class="item-menu item-icon-left" href="#/app/settings">
+                    <span class="icon mdi mdi-settings icon-menu gray"></span>
+                    {{::'SETTINGS' | translate}}
+                </ion-item>
+            </ion-list>
+        </ion-content>
+    </ion-side-menu>
+</ion-side-menus>

@@ -1,0 +1,27 @@
+<ion-view view-title="{{::'CATEGORIES' | translate}}" cache-view="false">
+  <ion-nav-buttons side="left">
+    <button type="button" class="button button-icon button-clear ion-android-menu" menu-toggle="left"></button>
+  </ion-nav-buttons>
+
+  <ion-content class="container">
+    <div class="list borderless light-bg has-fab">
+      <div class="divider"><span class="left">{{::'EARNINGS' | translate}}</span><hr></div>
+      <div class="item item-icon-left item-icon-right" ng-repeat="category in categoryCtrl.earningCategories track by category.id" ng-click="categoryCtrl.edit(category)">
+        <span class="icon {{::category.icon}}" ng-style="{{::category.iconColor}}"></span>
+        <h2>{{::category.name}}</h2>
+      </div>
+      <div class="divider"><span class="left">{{::'EXPENSES' | translate}}</span><hr></div>
+      <div class="item item-icon-left item-icon-right" ng-repeat="category in categoryCtrl.expenseCategories track by category.id" ng-click="categoryCtrl.edit(category)">
+        <span class="icon {{::category.icon}}" ng-style="{{::category.iconColor}}"></span>
+        <h2>{{::category.name}}</h2>
+      </div>
+    </div>
+    <br/>
+  </ion-content>
+  
+  <a ng-href="#/app/categories/new">
+    <button class="fab">
+      <span class="icon ion-plus-round"></span>
+    </button>
+  </a>
+</ion-view>

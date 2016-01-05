@@ -1,0 +1,26 @@
+<ion-modal-view>
+  <ion-content class="container">
+    <ion-scroll class="icon-select">
+      <div>
+        <span ng-repeat="icon in icons track by $index" ng-class="{'icon-selected': icon == $parent.icon}" class="icon {{::icon}}" style="color: rgb({{color.R}}, {{color.G}}, {{color.B}})" ng-click="selectIcon(icon)"></span>
+      </div>
+    </ion-scroll>
+    <div class="range range-assertive">
+			R <input type="range" ng-model="color.R" min="0" max="255">
+		</div>
+		<div class="range range-balanced">
+			G <input type="range" ng-model="color.G" min="0" max="255">
+		</div>
+		<div class="range range-positive">
+			B <input type="range" ng-model="color.B" min="0" max="255">
+		</div>
+		<div class="form-end-buttons">
+			<button class="button button-clear button-calm" ng-click="cancel()">
+			  {{::'CANCEL' | translate}}
+			</button>
+			<button class="button button-clear button-calm" ng-click="ok()">
+			  {{::'OK' | translate}}
+			</button>
+		</div>
+	</ion-content>
+</ion-modal-view>

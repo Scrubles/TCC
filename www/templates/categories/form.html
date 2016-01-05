@@ -1,0 +1,62 @@
+<form name="form" ng-submit="categoryCtrl.save()" novalidate>
+  <ion-view view-title="{{::'CATEGORY' | translate}}">
+ 
+    <ion-nav-buttons side="left">
+      <button type="button" class="button button-icon button-clear ion-android-arrow-back" ng-click="historyBack()"></button>
+    </ion-nav-buttons>
+    <ion-nav-buttons side="right">
+      <button type="button" class="button button-icon button-clear mdi mdi-delete" ng-click="categoryCtrl.delete()" ng-if="categoryCtrl.isEdit"></button>
+      <button type="button" class="button button-icon button-clear icon-checkmark" ng-click="categoryCtrl.submit()"></button>
+    </ion-nav-buttons>
+
+    <ion-content class="container" on-swipe-left="categoryCtrl.submit()">
+
+      <input type="hidden" ng-model="categoryCtrl.category.id">
+
+      <div class="list card borderless">
+        <div class="item item-icon-right" ng-class="{'error':(form.$submitted || form.name.$touched) && form.name.$error.required}">
+          <label for="categoryName">
+            <h2 class="title">{{::'NAME' | translate}}</h2>
+            <textarea class="textfield" name="name" id="categoryName" ng-model="categoryCtrl.category.name" required></textarea>
+          </label>
+          <span class="icon" ng-class="categoryCtrl.category.icon" style="color: rgb({{categoryCtrl.category.iconColorR}}, {{categoryCtrl.category.iconColorG}}, {{categoryCtrl.category.iconColorB}})" ionic-iconpicker ng-icon="categoryCtrl.category.icon" ng-icon-r="categoryCtrl.category.iconColorR" ng-icon-g="categoryCtrl.category.iconColorG" ng-icon-b="categoryCtrl.category.iconColorB">
+            <span class="iconpicker-down ion-android-arrow-dropdown"></span>
+          </span>
+        </div>
+
+        <div class="row light-bg no-horizontal-padding">
+          <div class="col no-horizontal-padding">
+            <div class="radio-button">
+              <input type="radio" ng-model="categoryCtrl.category.transactionType" ng-value="1" name="transactionType" id="type1" ng-disabled="categoryCtrl.isEdit" />
+              <label class="item item-icon-left " for="type1" ng-class="{'disabled': categoryCtrl.isEdit}">
+                <span class="icon calm mdi" ng-class="categoryCtrl.category.transactionType == 1 ? 'mdi-radiobox-marked' : 'mdi-radiobox-blank'"></span>
+                {{::'EARNING' | translate}}
+              </label>
+            </div>
+          </div>
+          <div class="col no-horizontal-padding">
+            <div class="radio-button">
+              <input type="radio" ng-model="categoryCtrl.category.transactionType" ng-value="2" name="transactionType" id="type2" ng-disabled="categoryCtrl.isEdit" />
+              <label class="item item-icon-left " for="type2" ng-class="{'disabled': categoryCtrl.isEdit}">
+                <span class="icon calm mdi" ng-class="categoryCtrl.category.transactionType == 2 ? 'mdi-radiobox-marked' : 'mdi-radiobox-blank'"></span>
+                {{::'EXPENSE' | translate}}
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-end-buttons">
+        <button type="button" class="button button-clear button-calm" ng-click="historyBack()">
+          {{::'CANCEL' | translate}}
+        </button>
+        <button type="button" class="button button-clear button-calm" ng-click="categoryCtrl.delete()" ng-if="categoryCtrl.isEdit">
+          {{::'DELETE' | translate}}
+        </button>
+        <button type="submit" class="button button-clear button-calm">
+          {{::'SAVE' | translate}}
+        </button>
+      </div>
+    </ion-content>
+  </ion-view>
+</form>

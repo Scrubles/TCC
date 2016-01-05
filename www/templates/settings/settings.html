@@ -1,0 +1,28 @@
+<ion-view view-title="{{::'SETTINGS' | translate}}">
+	<ion-nav-buttons side="left">
+    <button type="button" class="button button-icon button-clear ion-android-menu" menu-toggle="left"></button>
+  </ion-nav-buttons>
+
+  <ion-content class="container">
+    <div class="list">
+      <div class="item item-icon-right" ng-click="settingsCtrl.showLanguages()" id="languages">
+        <h3>{{::'LANGUAGES' | translate}}</h3>
+        <p>{{settingsCtrl.selectedLanguage | translate}}</p>
+        <span class="icon ion-android-arrow-dropdown"></span>
+      </div>
+    </div>
+  </ion-content>
+
+  <script id="languages.html" type="text/ng-template">
+    <ion-modal-view class="ion-select" ng-style="settingsCtrl.languagesStyle">
+      <ion-content>
+        <div class="list borderless">
+          <ion-item class="item-icon-right" ng-repeat="language in settingsCtrl.languages track by $index" ng-class="{'stable-bg': language == settingsCtrl.selectedLanguage}" ng-click="settingsCtrl.selectLanguage(language)">
+            <h2>{{::language | translate}}</h2>
+            <span class="icon" ng-class="{'ion-ios-checkmark-empty': language == settingsCtrl.selectedLanguage.value}"></span>
+          </ion-item>
+        </div>
+      </ion-content>
+    </ion-modal-view>
+  </script>
+</ion-view>

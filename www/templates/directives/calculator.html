@@ -1,0 +1,54 @@
+<ion-modal-view>
+    <ion-content class="container">
+        <div class="calculator">
+            <div class="row header calm-bg" ng-if="account">
+                <div class="col text-left">
+                    <h2 class="light">{{account.name}}</h2>
+                    <h4 class="light">{{::'BALANCE' | translate}}: {{account.value | currency:selectedCurrency}}</h4>
+                </div>
+            </div>
+            <div class="row sub-header light calm-bg bar-shadow">
+                <div class="col col-overflow col-67 text-right"><span class="equation light">{{equation}}</span></div>
+                <div class="col erase-button" ng-click="eraseLast()"><span class="icon ion-backspace"></span></div>
+                <div class="col erase-button" ng-click="eraseAll()"><span class="icon ion-close-circled"></span></div>
+            </div>
+            <div class="row buttons">
+                <div class="col" ng-click="addNumber('7')"><span>7</span></div>
+                <div class="col" ng-click="addNumber('8')"><span>8</span></div>
+                <div class="col" ng-click="addNumber('9')"><span>9</span></div>
+                <div class="col" ng-click="addOperator('\u00F7')"><span>&divide;</span></div>
+            </div>
+            <div class="row buttons">
+                <div class="col" ng-click="addNumber('4')"><span>4</span></div>
+                <div class="col" ng-click="addNumber('5')"><span>5</span></div>
+                <div class="col" ng-click="addNumber('6')"><span>6</span></div>
+                <div class="col" ng-click="addOperator('\u00D7')"><span>&times;</span></div>
+            </div>
+            <div class="row buttons">
+                <div class="col" ng-click="addNumber('1')"><span>1</span></div>
+                <div class="col" ng-click="addNumber('2')"><span>2</span></div>
+                <div class="col" ng-click="addNumber('3')"><span>3</span></div>
+                <div class="col" ng-click="addOperator('-')"><span>-</span></div>
+            </div>
+            <div class="row buttons">
+                <div class="col" ng-click="addDecimal()"><span>.</span></div>
+                <div class="col" ng-click="addNumber('0')"><span>0</span></div>
+                <div class="col" ng-click="equals()"><span>=</span></div>
+                <div class="col" ng-click="addOperator('+')"><span>+</span></div>
+            </div>
+            <div class="form-end-buttons">
+                <button class="button button-clear button-calm" ng-click="cancel()">
+                    {{::'CANCEL' | translate}}
+                </button>
+                <button class="button button-clear button-calm" ng-click="ok()">
+                    {{::'OK' | translate}}
+                </button>
+            </div>
+            <div class="row ng-hide" ng-show="messages">
+                <div class="col">
+                    <p class="text-left" ng-repeat="message in messages track by $index">{{::message | translate}}</p>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-modal-view>

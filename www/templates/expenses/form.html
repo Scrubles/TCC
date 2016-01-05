@@ -1,0 +1,110 @@
+<form name="form" ng-submit="expenseCtrl.save()" novalidate>
+  <ion-view view-title="{{::'EXPENSE' | translate}}" cache-view="false">
+    <ion-nav-buttons side="left">
+      <button type="button" class="button button-icon button-clear ion-android-arrow-back" ng-click="historyBack()"></button>
+    </ion-nav-buttons>
+    <ion-nav-buttons side="right">
+      <button type="button" class="button button-icon button-clear mdi mdi-delete" ng-click="expenseCtrl.delete()" ng-if="expenseCtrl.isEdit"></button>
+      <button type="button" class="button button-icon button-clear icon-checkmark" ng-click="expenseCtrl.submit()"></button>
+    </ion-nav-buttons>
+
+    <ion-content class="container" on-swipe-left="expenseCtrl.submit()">
+
+      <input type="hidden" ng-model="expenseCtrl.expense.id">
+
+      <div class="list card borderless">
+        <div class="item item-icon-left item-icon-right item-light" ng-click="expenseCtrl.accountsModal.show()" id="expenseAccounts">
+          <span class="icon" ng-class="expenseCtrl.expense.account ? expenseCtrl.expense.account.icon : 'mdi mdi-information-outline assertive'" ng-style="expenseCtrl.expense.account ? expenseCtrl.expense.account.iconColor : {}"></span>
+          {{::'ACCOUNT' | translate}}
+          <p>{{expenseCtrl.expense.account.name}}</p>
+          <span class="icon ion-android-arrow-dropdown"></span>
+        </div>
+
+        <div class="item item-icon-left item-icon-right item-light" ng-click="expenseCtrl.categoriesModal.show()" id="expenseCategories">
+          <span class="icon" ng-class="expenseCtrl.expense.category.icon" ng-style="expenseCtrl.expense.category.iconColor"></span>
+          {{::'CATEGORY' | translate}}
+          <p>{{expenseCtrl.expense.category.name}}</p>
+          <span class="icon ion-android-arrow-dropdown"></span>
+        </div>
+        
+        <ionic-calculator ng-value="expenseCtrl.expense.value" positive="true" account="expenseCtrl.expense.account">
+          <input type="hidden" name="value" ng-model="expenseCtrl.expense.value" required>
+          <div class="item item-icon-right" ng-class="{'error': form.$submitted && form.value.$error.required}">
+            <h2 class="title">{{::'VALUE' | translate}}</h2>
+            <p>{{expenseCtrl.expense.value | currency:selectedCurrency}}</p>
+            <span class="icon icon-calculator"></span>
+          </div>
+        </ionic-calculator>
+
+        <ionic-datepicker idate="expenseCtrl.expense.effectiveDate" notify-time="expenseCtrl.expense.notifyTime">
+          <div class="item item-icon-right">
+            <h2 class="title">{{::'DATE' | translate}}</h2>
+            <p>{{expenseCtrl.expense.effectiveDate | date:'shortDate'}}</p>
+            <span class="icon icon-calendar"></span>
+          </div>
+        </ionic-datepicker>
+
+        <label for="expenseDescription" class="item">
+          <h2 class="title">{{::'DESCRIPTION' | translate}}</h2>
+          <textarea class="textfield" id="expenseDescription" name="description" ng-model="expenseCtrl.expense.description"></textarea>
+        </label>
+        
+        <div class="item item-checkbox">
+            <label class="checkbox checkbox-square checkbox-calm">
+                <input type="checkbox" ng-model="expenseCtrl.expense.paid">
+            </label>
+            {{::'PAID' | translate}}
+        </div>
+      </div>
+
+
+      <div class="form-end-buttons">
+        <button type="button" class="button button-clear button-calm" ng-click="historyBack()">
+          {{::'CANCEL' | translate}}
+        </button>
+        <button type="button" class="button button-clear button-calm" ng-click="expenseCtrl.delete()" ng-if="expenseCtrl.isEdit">
+          {{::'DELETE' | translate}}
+        </button>
+        <button type="submit" class="button button-clear button-calm">
+          {{::'SAVE' | translate}}
+        </button>
+      </div>
+    </ion-content>
+
+    <script id="expenseAccounts.html" type="text/ng-template">
+      <ion-modal-view class="ion-select"  ng-style="expenseCtrl.calculateAccountsPosition()">
+        <ion-content>
+          <div class="list borderless">
+            <ion-item class="item-icon-left item-icon-right" ng-class="{'stable-bg': account.id == expenseCtrl.expense.account.id}" ng-click="expenseCtrl.selectAccount(account)" ng-repeat="account in expenseCtrl.accounts track by account.id">
+              <span class="icon {{::account.icon}}" ng-style="account.iconColor"></span>
+              <h2>{{::account.name}}</h2>
+              <span class="icon" ng-class="{'ion-ios-checkmark-empty': account.id == expenseCtrl.expense.account.id}"></span>
+            </ion-item>
+            <ion-item class="item-icon-left" ng-click="expenseCtrl.newAccount()">
+              <span class="icon icon-plus"></span>
+              {{::'ADD_NEW_ACCOUNT' | translate}}
+            </ion-item>
+          </div>
+        </ion-content>
+      </ion-modal-view>
+    </script>
+
+    <script id="expenseCategories.html" type="text/ng-template">
+      <ion-modal-view class="ion-select" ng-style="expenseCtrl.calculateCategoriesPosition()">
+        <ion-content>
+          <div class="list borderless">
+            <ion-item class="item-icon-left item-icon-right" ng-class="{'stable-bg': category.id == expenseCtrl.expense.category.id}" ng-click="expenseCtrl.selectCategory(category)" ng-repeat="category in expenseCtrl.categories track by category.id">
+              <span class="icon {{::category.icon}}" ng-style="category.iconColor"></span>
+              <h2>{{::category.name}}</h2>
+              <span class="icon" ng-class="{'ion-ios-checkmark-empty': category.id == expenseCtrl.expense.category.id}"></span>
+            </ion-item>
+            <ion-item class="item-icon-left" ng-click="expenseCtrl.newCategory()">
+              <span class="icon icon-plus"></span>
+              {{::'ADD_NEW_CATEGORY' | translate}}
+            </ion-item>
+          </div>
+        </ion-content>
+      </ion-modal-view>
+    </script>
+  </ion-view>
+</form>

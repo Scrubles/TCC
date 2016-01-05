@@ -1,0 +1,49 @@
+<form name="form" ng-submit="accountCtrl.save()" novalidate>
+  <ion-view view-title="{{::'ACCOUNT' | translate}}">
+    <ion-nav-buttons side="left">
+      <button type="button" class="button button-icon button-clear ion-android-arrow-back" ng-click="historyBack()"></button>
+    </ion-nav-buttons>
+    <ion-nav-buttons side="right">
+      <button type="button" class="button button-icon button-clear mdi mdi-delete" ng-click="accountCtrl.delete()" ng-if="accountCtrl.isEdit"></button>
+      <button type="button" class="button button-icon button-clear icon-checkmark" ng-click="accountCtrl.submit()"></button>
+    </ion-nav-buttons>
+
+    <ion-content class="container" on-swipe-left="accountCtrl.submit()">
+
+      <input type="hidden" ng-model="accountCtrl.account.id">
+
+      <div class="list card borderless">
+        <div class="item item-icon-right" ng-class="{'error':(form.$submitted || form.name.$touched) && form.name.$error.required}">
+          <label for="accountName">
+            <h2 class="title">{{::'NAME' | translate}}</h2>
+            <textarea class="textfield" name="name" id="accountName" ng-model="accountCtrl.account.name" required></textarea>
+          </label>
+          <span class="icon {{accountCtrl.account.icon}}" style="color: rgb({{accountCtrl.account.iconColorR}}, {{accountCtrl.account.iconColorG}}, {{accountCtrl.account.iconColorB}})" ionic-iconpicker ng-icon="accountCtrl.account.icon" ng-icon-r="accountCtrl.account.iconColorR" ng-icon-g="accountCtrl.account.iconColorG" ng-icon-b="accountCtrl.account.iconColorB">
+            <span class="iconpicker-down ion-android-arrow-dropdown"></span>
+          </span>
+        </div>
+
+        <ionic-calculator ng-value="accountCtrl.account.value" positive="false">
+          <input type="hidden" name="value" ng-model="accountCtrl.account.value" required>
+          <div class="item item-icon-right" ng-class="{'error': form.$submitted && form.value.$error.required}">
+            <h2 class="title">{{::'OPENING_BALANCE' | translate}}</h2>
+            <p>{{accountCtrl.account.value | currency:selectedCurrency}}</p>
+            <span class="icon icon-calculator"></span>
+          </div>
+        </ionic-calculator>
+      </div>
+
+      <div class="form-end-buttons">
+        <button type="button" class="button button-clear button-calm" ng-click="historyBack()">
+          {{::'CANCEL' | translate}}
+        </button>
+        <button type="button" class="button button-clear button-calm" ng-click="accountCtrl.delete()" ng-if="accountCtrl.isEdit">
+          {{::'DELETE' | translate}}
+        </button>
+        <button type="submit" class="button button-clear button-calm">
+          {{::'SAVE' | translate}}
+        </button>
+      </div>
+    </ion-content>
+  </ion-view>
+</form>

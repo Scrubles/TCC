@@ -1,0 +1,96 @@
+<ion-view view-title="{{::'EXPENSES' | translate}}" cache-view="false">
+ 
+  <ion-nav-buttons side="left">
+    <button type="button" class="button button-icon button-clear ion-android-menu" menu-toggle="left"></button>
+  </ion-nav-buttons>
+  <ion-nav-buttons side="right">
+    <button type="button" class="button button-icon button-clear ion-android-funnel" ng-click="expenseCtrl.modal.show()"></button>
+  </ion-nav-buttons>
+
+  <div class="bar bar-subheader bar-calm bar-shadow">
+    <button class="button button-icon button-clear ion-arrow-left-b" ng-click="expenseCtrl.changeMonth(-1)"></button>
+    <h2 class="title" ng-click="expenseCtrl.goToCurrentMonth()">{{::'TOTAL' | translate}}({{expenseCtrl.filters.currentMonth | date:'MMMM'}}): {{expenseCtrl.expenses | sum:'value' | currency:selectedCurrency}}</h2>
+    <button class="button button-icon button-clear ion-arrow-right-b" ng-click="expenseCtrl.changeMonth(1)"></button>
+  </div>
+
+  <div ng-if="expenseCtrl.hasExpenses">
+    <ion-content class="has-subheader container" on-swipe-right="expenseCtrl.changeMonth(-1)" on-swipe-left="expenseCtrl.changeMonth(1)">
+        <div class="list borderless light-bg has-fab">
+            <div ng-repeat="expense in expenseCtrl.expenses track by expense.id">
+            <div class="divider" ng-if="expenseCtrl.isFirst(expense.effectiveDate, $index)">
+                <span class="left">{{::expense.effectiveDate | date:'shortDate'}}</span>
+                <span class="right">{{::(expenseCtrl.expenses | whereDate:'effectiveDate':(expense.effectiveDate | date:'yyyy-MM-dd' ) | sum:'value' | currency:selectedCurrency)}}</span>
+                <hr>
+            </div>
+            <div class="item item-icon-left item-icon-right" ng-click="expenseCtrl.edit(expense.id)">
+                <span class="icon {{::expense.account.icon}}" ng-style="expense.account.iconColor"></span>
+                <h2>{{::(expense.description ? expense.description : expense.category.name)}}</h2>
+                <p>
+                <span class="assertive">{{::expense.value | currency:selectedCurrency}}</span>
+                <span class="transaction-situation">({{::(expense.paid ? 'PAID' : 'NOT_PAID' | translate)}})</span>
+                </p>
+                <span class="icon {{::expense.category.icon}}" ng-style="expense.category.iconColor"></span>
+            </div>
+        </div>
+      </div>
+      <br/>
+    </ion-content>
+  </div>
+
+  <a ng-href="#/app/expenses/new" ng-if="!expenseCtrl.hasExpenses" class="no-data">
+    <ion-content class="has-subheader container" on-swipe-right="expenseCtrl.changeMonth(-1)" on-swipe-left="expenseCtrl.changeMonth(1)">
+      <br><br>
+      {{::'ADD_NEW_EXPENSE' | translate}}
+    </ion-content>
+  </a>
+
+  <a href="#/app/expenses/new">
+    <button class="fab">
+      <span class="icon ion-plus-round"></span>
+    </button>
+  </a>
+
+  <script id="expenseAccountsFilter.html" type="text/ng-template">
+    <ion-modal-view class="ion-select" ng-style="expenseCtrl.accountsFilterStyle">
+      <ion-content>
+        <div class="list borderless">
+          <div class="item item-checkbox">
+            <label class="checkbox checkbox-square checkbox-calm" ng-click="expenseCtrl.toggleAllAccounts()">
+              <input type="checkbox" ng-checked="expenseCtrl.isAllAccounts()" />
+            </label>
+            {{::'ALL_ACCOUNTS' | translate}}
+          </div>
+          <div class="item item-checkbox item-icon-right" ng-repeat="account in expenseCtrl.accounts track by account.id">
+            <label class="checkbox checkbox-square checkbox-calm">
+              <input type="checkbox" checklist-model="expenseCtrl.modalFilters.accounts" checklist-value="account">
+            </label>
+            {{account.name}}
+            <span class="icon" ng-class="account.icon" ng-style="account.iconColor"></span>
+          </div>
+        </div>
+      </ion-content>
+    </ion-modal-view>
+  </script>
+
+  <script id="expenseCategoriesFilter.html" type="text/ng-template">
+    <ion-modal-view class="ion-select" ng-style="expenseCtrl.categoriesFilterStyle">
+      <ion-content>
+        <div class="list borderless">
+          <div class="item item-checkbox">
+            <label class="checkbox checkbox-square checkbox-calm" ng-click="expenseCtrl.toggleAllCategories()">
+              <input type="checkbox" ng-checked="expenseCtrl.isAllCategories()" />
+            </label>
+            {{::'ALL_CATEGORIES' | translate}}
+          </div>
+          <div class="item item-checkbox item-icon-right" ng-repeat="category in expenseCtrl.categories track by category.id">
+            <label class="checkbox checkbox-square checkbox-calm">
+              <input type="checkbox" checklist-model="expenseCtrl.modalFilters.categories" checklist-value="category">
+            </label>
+            {{category.name}}
+            <span class="icon" ng-class="category.icon" ng-style="category.iconColor"></span>
+          </div>
+        </div>
+      </ion-content>
+    </ion-modal-view>
+  </script>
+</ion-view>

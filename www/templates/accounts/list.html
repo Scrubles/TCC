@@ -1,0 +1,52 @@
+<ion-view view-title="{{::'ACCOUNTS' | translate}}" cache-view="false">
+  <ion-nav-buttons side="left">
+    <button type="button" class="button button-icon button-clear ion-android-menu" menu-toggle="left"></button>
+  </ion-nav-buttons>
+  <ion-nav-buttons side="right">
+    <button type="button" class="button button-icon button-clear mdi mdi-swap-vertical" ng-class="{'disabled': accountCtrl.accounts.length < 2}" ng-click="accountCtrl.newTransfer()"></button>
+  </ion-nav-buttons>
+
+  <div class="bar bar-subheader bar-calm bar-shadow">
+    <h2 class="title">{{::'TOTAL' | translate}}: {{accountCtrl.accounts | sum:'value' | currency:selectedCurrency}}</h2>
+  </div>
+
+  <div ng-if="accountCtrl.hasAccounts">
+    <ion-content class="has-subheader container">
+      <div class="list card" ng-repeat="account in accountCtrl.accounts track by account.id" ng-class="{'has-fab': $last}">
+        <div class="item item-icon-left" ng-click="accountCtrl.edit(account.id)">
+          <span class="icon {{::account.icon}}" ng-style="account.iconColor"></span>
+          <h2>{{::account.name}}</h2>
+          <p>
+            {{::'BALANCE' | translate}}: 
+            <span ng-class="account.value >= 0 ? 'balanced' : 'assertive'">{{::account.value | currency:selectedCurrency}}</span>
+          </p>
+        </div>
+
+        <div class="item tabs tabs-secondary tabs-icon-left tabs-stable">
+          <a class="tab-item balanced" href="#/app/earnings/new?accountId={{::account.id}}">
+            <span class="icon icon-dollars"></span>
+            {{::'NEW_EARNING' | translate}}
+          </a>
+          <a class="tab-item assertive" href="#/app/expenses/new?accountId={{::account.id}}">
+            <span class="icon icon-banknote"></span>
+            {{::'NEW_EXPENSE' | translate}}
+          </a>
+        </div>
+      </div>
+      <br/>
+    </ion-content>
+  </div>
+
+  <a ng-href="#/app/accounts/new" ng-if="!accountCtrl.hasAccounts" class="no-data">
+    <ion-content class="has-subheader container">
+      <br><br>
+      {{::'ADD_NEW_ACCOUNT' | translate}}
+    </ion-content>
+  </a>
+  
+  <a href="#/app/accounts/new">
+    <button class="fab">
+      <span class="icon ion-plus-round"></span>
+    </button>
+  </a>
+</ion-view>

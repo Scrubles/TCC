@@ -1,0 +1,17 @@
+$stable: #f6f7f8 !default;
+$positive: #4a66a0 !default;
+$calm: #009688 !default;
+
+$range-slider-width: 16px !default;
+$range-slider-height: 16px !default;
+
+// The path for our ionicons font files, relative to the built CSS in www/css
+$ionicons-font-path: "../lib/ionic/fonts" !default;
+
+// Include all of Ionic
+@import "www/lib/ionic/scss/ionic";
+@import "_range";
+
+// Custom
+@import "application";
+@import "icons";

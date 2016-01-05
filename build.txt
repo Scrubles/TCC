@@ -1,0 +1,14 @@
+cordova build --release android
+Marcelo Nascimento
+MMN
+MMN
+Rio de Janeiro
+RJ
+BR
+
+keytool -genkey -v -keystore tcc.keystore -alias tcc -keyalg RSA -keysize 2048 -validity 10000 (1ª vez apenas)
+
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore tcc.keystore platforms/android/build/outputs/apk/android-release-unsigned.apk tcc
+rafaelinda
+
+zipalign -v 4 platforms/android/build/outputs/apk/android-release-unsigned.apk tcc.apk

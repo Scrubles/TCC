@@ -1,0 +1,96 @@
+<ion-view view-title="{{::'EARNINGS' | translate}}" cache-view="false">
+ 
+  <ion-nav-buttons side="left">
+    <button type="button" class="button button-icon button-clear ion-android-menu" menu-toggle="left"></button>
+  </ion-nav-buttons>
+  <ion-nav-buttons side="right">
+    <button type="button" class="button button-icon button-clear ion-android-funnel" ng-click="earningCtrl.modal.show()"></button>
+  </ion-nav-buttons>
+
+  <div class="bar bar-subheader bar-calm bar-shadow">
+    <button class="button button-icon button-clear ion-arrow-left-b" ng-click="earningCtrl.changeMonth(-1)"></button>
+    <h2 class="title" ng-click="earningCtrl.goToCurrentMonth()">{{::'TOTAL' | translate}}({{earningCtrl.filters.currentMonth | date:'MMMM'}}): {{earningCtrl.earnings | sum:'value' | currency:selectedCurrency}}</h2>
+    <button class="button button-icon button-clear ion-arrow-right-b" ng-click="earningCtrl.changeMonth(1)"></button>
+  </div>
+
+  <div ng-if="earningCtrl.hasEarnings">
+    <ion-content class="has-subheader container" on-swipe-right="earningCtrl.changeMonth(-1)" on-swipe-left="earningCtrl.changeMonth(1)">
+        <div class="list borderless light-bg has-fab">
+          <div ng-repeat="earning in earningCtrl.earnings track by earning.id">
+            <div class="divider" ng-if="earningCtrl.isFirst(earning.effectiveDate, $index)">
+              <span class="left">{{::earning.effectiveDate | date:'shortDate'}}</span>
+              <span class="right">{{::(earningCtrl.earnings | whereDate:'effectiveDate':(earning.effectiveDate | date:'yyyy-MM-dd' ) | sum:'value' | currency:selectedCurrency)}}</span>
+              <hr>
+            </div>
+            <div class="item item-icon-left item-icon-right" ng-click="earningCtrl.edit(earning.id)">
+              <span class="icon {{::earning.account.icon}}" ng-style="earning.account.iconColor"></span>
+              <h2>{{::(earning.description ? earning.description : earning.category.name)}}</h2>
+              <p>
+                <span class="balanced">{{::earning.value | currency:selectedCurrency}}</span>
+                <span class="transaction-situation">({{::(earning.received ? 'RECEIVED' : 'NOT_RECEIVED' | translate)}})</span>
+              </p>
+              <span class="icon {{::earning.category.icon}}" ng-style="earning.category.iconColor"></span>
+            </div>
+          </div>
+        </div>
+        <br/>
+    </ion-content>
+  </div>
+
+  <a ng-href="#/app/earnings/new" ng-if="!earningCtrl.hasEarnings" class="no-data">
+    <ion-content class="has-subheader container" on-swipe-right="earningCtrl.changeMonth(-1)" on-swipe-left="earningCtrl.changeMonth(1)">
+      <br><br>
+      {{::'ADD_NEW_EARNING' | translate}}
+    </ion-content>
+  </a>
+
+  <a href="#/app/earnings/new">
+    <button class="fab">
+      <span class="icon ion-plus-round"></span>
+    </button>
+  </a>
+
+  <script id="earningAccountsFilter.html" type="text/ng-template">
+    <ion-modal-view class="ion-select" ng-style="earningCtrl.accountsFilterStyle">
+      <ion-content>
+        <div class="list borderless">
+          <div class="item item-checkbox">
+            <label class="checkbox checkbox-square checkbox-calm" ng-click="earningCtrl.toggleAllAccounts()">
+              <input type="checkbox" ng-checked="earningCtrl.isAllAccounts()" />
+            </label>
+            {{::'ALL_ACCOUNTS' | translate}}
+          </div>
+          <div class="item item-checkbox item-icon-right" ng-repeat="account in earningCtrl.accounts track by account.id">
+            <label class="checkbox checkbox-square checkbox-calm">
+              <input type="checkbox" checklist-model="earningCtrl.modalFilters.accounts" checklist-value="account">
+            </label>
+            {{account.name}}
+            <span class="icon" ng-class="account.icon" ng-style="account.iconColor"></span>
+          </div>
+        </div>
+      </ion-content>
+    </ion-modal-view>
+  </script>
+
+  <script id="earningCategoriesFilter.html" type="text/ng-template">
+    <ion-modal-view class="ion-select" ng-style="earningCtrl.categoriesFilterStyle">
+      <ion-content>
+        <div class="list borderless">
+          <div class="item item-checkbox">
+            <label class="checkbox checkbox-square checkbox-calm" ng-click="earningCtrl.toggleAllCategories()">
+              <input type="checkbox" ng-checked="earningCtrl.isAllCategories()" />
+            </label>
+            {{::'ALL_CATEGORIES' | translate}}
+          </div>
+          <div class="item item-checkbox item-icon-right" ng-repeat="category in earningCtrl.categories track by category.id">
+            <label class="checkbox checkbox-square checkbox-calm">
+              <input type="checkbox" checklist-model="earningCtrl.modalFilters.categories" checklist-value="category">
+            </label>
+            {{category.name}}
+            <span class="icon" ng-class="category.icon" ng-style="category.iconColor"></span>
+          </div>
+        </div>
+      </ion-content>
+    </ion-modal-view>
+  </script>
+</ion-view>

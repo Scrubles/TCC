@@ -1,0 +1,48 @@
+<ion-modal-view>
+	<ion-content class="container">
+		<div class="row calm-bg light datepicker-header bar-shadow">
+			<div class="col">
+        {{dateSelection.selectedDate | date:'yyyy'}}
+				<h1 class="light">{{dateSelection.selectedDate | date:'EEE, MMM dd'}}</h1>
+			</div>
+		</div>
+		<div class="text-center">
+			<div class="row">
+				<div class="col">
+					<button class="button-clear" ng-click=prevMonth()>
+						<i class="icon ion-chevron-left dark"></i>
+					</button>
+				</div>
+				<div class="col col-75" style="font-weight: bold;">{{currentMonth}} {{currentYear}}</div>
+				<div class="col">
+					<button class="button-clear" ng-click=nextMonth()>
+						<i class="icon ion-chevron-right dark"></i>
+					</button>
+				</div>
+			</div>
+			<div>
+				<div class="row" style="font-weight: bold;">
+					<div class="col" ng-repeat="weekName in weekNames track by $index">{{weekName | limitTo:1}}</div>
+				</div>
+	      <div class="row" ng-repeat="row in rows track by $index" style="text-align: center;">
+	        <div class="col" ng-repeat="col in cols track by $index">
+	          <div ng-class="{'date-col': (dayList[$parent.$index * numColumns + $index].day != undefined), 'date-selected': (dayList[$parent.$index * numColumns + $index].dateString === selectedDateString && dayList[$parent.$index * numColumns + $index].day != undefined), 'today' : (dayList[$parent.$index * numColumns + $index].date == today.date && dayList[$parent.$index * numColumns + $index].month == today.month && dayList[$parent.$index * numColumns + $index].year == today.year)}" ng-click="dateSelected(dayList[$parent.$index * numColumns + $index])">
+	            {{dayList[$parent.$index * numColumns + $index].date}}
+	          </div>
+	        </div>
+	      </div>
+			</div>
+		</div>
+		<div class="form-end-buttons">
+			<button class="button button-clear button-calm" ng-click="cancel()">
+			  {{::'CANCEL' | translate}}
+			</button>
+			<button class="button button-clear button-calm" ng-click="selectToday()">
+			  {{::'TODAY' | translate}}
+			</button>
+			<button class="button button-clear button-calm" ng-click="ok()">
+			  {{::'OK' | translate}}
+			</button>
+		</div>
+	</ion-content>
+</ion-modal-view>

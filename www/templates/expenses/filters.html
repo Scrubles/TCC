@@ -1,0 +1,40 @@
+<ion-modal-view>
+  <ion-header-bar class="bar-calm bar-shadow">
+    <h1 class="title">{{::'FILTERS' | translate}}</h1>
+    <button type="button" class="button button-icon button-clear icon-checkmark" ng-click="expenseCtrl.saveFilters()"></button>
+  </ion-header-bar>
+
+  <ion-content class="container" on-swipe-left="expenseCtrl.saveFilters()">
+    <div class="list borderless light-bg">
+      <div class="divider">
+        <span class="left">{{::'ACCOUNTS' | translate}}</span>
+        <hr>
+      </div>
+      <div class="item item-icon-right item-light" ng-click="expenseCtrl.showAccounts()" id="expenseAccountsFilter">
+        <p>{{expenseCtrl.modalFilters.accounts | join:'name':expenseCtrl.accounts.length:expenseCtrl.allAccounts:expenseCtrl.filterAccounts}}</p>
+        <span class="icon ion-android-arrow-dropdown"></span>
+      </div>
+
+      <div class="divider">
+        <span class="left">{{::'CATEGORIES' | translate}}</span>
+        <hr>
+      </div>
+      <div class="item item-icon-right item-light" ng-click="expenseCtrl.showCategories()" id="expenseCategoriesFilter">
+        <p>{{expenseCtrl.modalFilters.categories | join:'name':expenseCtrl.categories.length:expenseCtrl.allCategories:expenseCtrl.filterCategories}}</p>
+        <span class="icon ion-android-arrow-dropdown"></span>
+      </div>
+    </div>
+    
+    <div class="form-end-buttons">
+      <button class="button button-clear button-calm" ng-click="expenseCtrl.modal.hide()">
+        {{::'CANCEL' | translate}}
+      </button>
+      <button class="button button-clear button-calm" ng-click="expenseCtrl.modalFilters = {accounts: [], categories: []}">
+        {{::'RESET_FILTERS' | translate}}
+      </button>
+      <button class="button button-clear button-calm" ng-click="expenseCtrl.saveFilters()">
+        {{::'OK' | translate}}
+      </button>
+    </div>
+  </ion-content>
+</ion-modal-view>
